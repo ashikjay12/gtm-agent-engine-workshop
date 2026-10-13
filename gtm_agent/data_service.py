@@ -77,7 +77,8 @@ def update_prospect_info(prospect_id, technology):
     record = PROSPECTS.get(prospect_id)
     if record is None:
         return {"updated": False, "found": False}
-    tech_stack = list(record["tech_stack"])
+    tech_stack = record["tech_stack"]
     if technology not in tech_stack:
         tech_stack.append(technology)
+    _PROFILES.pop(prospect_id, None)
     return {"updated": True, "found": True, "tech_stack": tech_stack}
